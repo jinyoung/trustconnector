@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: advertising-and-marketing-partner
+  labels:
+    app: advertising-and-marketing-partner
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: advertising-and-marketing-partner

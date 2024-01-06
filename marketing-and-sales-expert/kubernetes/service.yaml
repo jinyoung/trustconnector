@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketing-and-sales-expert
+  labels:
+    app: marketing-and-sales-expert
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: marketing-and-sales-expert

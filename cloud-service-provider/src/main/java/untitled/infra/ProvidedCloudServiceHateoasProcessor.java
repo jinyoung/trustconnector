@@ -1,0 +1,19 @@
+package untitled.infra;
+
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.RepresentationModelProcessor;
+import org.springframework.stereotype.Component;
+import untitled.domain.*;
+
+@Component
+public class ProvidedCloudServiceHateoasProcessor
+    implements RepresentationModelProcessor<EntityModel<ProvidedCloudService>> {
+
+    @Override
+    public EntityModel<ProvidedCloudService> process(
+        EntityModel<ProvidedCloudService> model
+    ) {
+        return model;
+    }
+}

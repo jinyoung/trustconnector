@@ -1,0 +1,108 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+#<<< API Gateway / Routes
+      routes:
+        - id: demand-company
+          uri: http://localhost:8082
+          predicates:
+            - Path=/aiSolutionRequests/**, /consultingAndRequirementAnalyses/**, /solutionProvisionAndMaintenances/**, /technicalSupports/**, 
+        - id: supply-company
+          uri: http://localhost:8083
+          predicates:
+            - Path=/developedAndProvidedSolutions/**, /customerRequirementAnalyses/**, /technologyUpdateAndMaintenances/**, /technicalSupports/**, 
+        - id: ai-technology-provider
+          uri: http://localhost:8084
+          predicates:
+            - Path=/providedAiTechnologies/**, 
+        - id: advertising-and-marketing-partner
+          uri: http://localhost:8085
+          predicates:
+            - Path=/marketingAndAdvertisingActivities/**, 
+        - id: cloud-service-provider
+          uri: http://localhost:8086
+          predicates:
+            - Path=/providedCloudServices/**, 
+        - id: developer-and-technical-expert
+          uri: http://localhost:8087
+          predicates:
+            - Path=/solutionDevelopments/**, /technicalSupports/**, 
+        - id: marketing-and-sales-expert
+          uri: http://localhost:8088
+          predicates:
+            - Path=/marketingAndSalesActivities/**, 
+        - id: frontend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+#>>> API Gateway / Routes
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: demand-company
+          uri: http://demandCompany:8080
+          predicates:
+            - Path=/aiSolutionRequests/**, /consultingAndRequirementAnalyses/**, /solutionProvisionAndMaintenances/**, /technicalSupports/**, 
+        - id: supply-company
+          uri: http://supplyCompany:8080
+          predicates:
+            - Path=/developedAndProvidedSolutions/**, /customerRequirementAnalyses/**, /technologyUpdateAndMaintenances/**, /technicalSupports/**, 
+        - id: ai-technology-provider
+          uri: http://aiTechnologyProvider:8080
+          predicates:
+            - Path=/providedAiTechnologies/**, 
+        - id: advertising-and-marketing-partner
+          uri: http://advertisingAndMarketingPartner:8080
+          predicates:
+            - Path=/marketingAndAdvertisingActivities/**, 
+        - id: cloud-service-provider
+          uri: http://cloudServiceProvider:8080
+          predicates:
+            - Path=/providedCloudServices/**, 
+        - id: developer-and-technical-expert
+          uri: http://developerAndTechnicalExpert:8080
+          predicates:
+            - Path=/solutionDevelopments/**, /technicalSupports/**, 
+        - id: marketing-and-sales-expert
+          uri: http://marketingAndSalesExpert:8080
+          predicates:
+            - Path=/marketingAndSalesActivities/**, 
+        - id: frontend
+          uri: http://frontend:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080

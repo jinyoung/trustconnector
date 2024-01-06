@@ -1,0 +1,109 @@
+name: github-action
+run-name: ${{ github.actor }} is out building GitHub Actions
+
+on:
+  push:
+    # Pattern matched against refs/tags
+    tags:        
+      - '**' 
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build Maven Projects
+        run: |
+          mvn clean package -f ./demand-company/pom.xml
+          mvn clean package -f ./supply-company/pom.xml
+          mvn clean package -f ./ai-technology-provider/pom.xml
+          mvn clean package -f ./advertising-and-marketing-partner/pom.xml
+          mvn clean package -f ./cloud-service-provider/pom.xml
+          mvn clean package -f ./developer-and-technical-expert/pom.xml
+          mvn clean package -f ./marketing-and-sales-expert/pom.xml
+
+      - name: Docker Build and push for DemandCompany
+        uses: docker/build-push-action@v4
+        with:
+          context: ./demand-company
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/demand-company:latest
+            ghcr.io/${{ github.repository }}/demand-company:${{ github.ref_name }}
+            
+      - name: Docker Build and push for SupplyCompany
+        uses: docker/build-push-action@v4
+        with:
+          context: ./supply-company
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/supply-company:latest
+            ghcr.io/${{ github.repository }}/supply-company:${{ github.ref_name }}
+            
+      - name: Docker Build and push for AiTechnologyProvider
+        uses: docker/build-push-action@v4
+        with:
+          context: ./ai-technology-provider
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/ai-technology-provider:latest
+            ghcr.io/${{ github.repository }}/ai-technology-provider:${{ github.ref_name }}
+            
+      - name: Docker Build and push for AdvertisingAndMarketingPartner
+        uses: docker/build-push-action@v4
+        with:
+          context: ./advertising-and-marketing-partner
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/advertising-and-marketing-partner:latest
+            ghcr.io/${{ github.repository }}/advertising-and-marketing-partner:${{ github.ref_name }}
+            
+      - name: Docker Build and push for CloudServiceProvider
+        uses: docker/build-push-action@v4
+        with:
+          context: ./cloud-service-provider
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/cloud-service-provider:latest
+            ghcr.io/${{ github.repository }}/cloud-service-provider:${{ github.ref_name }}
+            
+      - name: Docker Build and push for DeveloperAndTechnicalExpert
+        uses: docker/build-push-action@v4
+        with:
+          context: ./developer-and-technical-expert
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/developer-and-technical-expert:latest
+            ghcr.io/${{ github.repository }}/developer-and-technical-expert:${{ github.ref_name }}
+            
+      - name: Docker Build and push for MarketingAndSalesExpert
+        uses: docker/build-push-action@v4
+        with:
+          context: ./marketing-and-sales-expert
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/marketing-and-sales-expert:latest
+            ghcr.io/${{ github.repository }}/marketing-and-sales-expert:${{ github.ref_name }}
+            

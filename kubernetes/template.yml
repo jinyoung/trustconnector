@@ -1,0 +1,399 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demand-company
+  labels:
+    app: demand-company
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demand-company
+  template:
+    metadata:
+      labels:
+        app: demand-company
+    spec:
+      containers:
+        - name: demand-company
+          image: username/demand-company:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supply-company
+  labels:
+    app: supply-company
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supply-company
+  template:
+    metadata:
+      labels:
+        app: supply-company
+    spec:
+      containers:
+        - name: supply-company
+          image: username/supply-company:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-technology-provider
+  labels:
+    app: ai-technology-provider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-technology-provider
+  template:
+    metadata:
+      labels:
+        app: ai-technology-provider
+    spec:
+      containers:
+        - name: ai-technology-provider
+          image: username/ai-technology-provider:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: advertising-and-marketing-partner
+  labels:
+    app: advertising-and-marketing-partner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: advertising-and-marketing-partner
+  template:
+    metadata:
+      labels:
+        app: advertising-and-marketing-partner
+    spec:
+      containers:
+        - name: advertising-and-marketing-partner
+          image: username/advertising-and-marketing-partner:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-service-provider
+  labels:
+    app: cloud-service-provider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloud-service-provider
+  template:
+    metadata:
+      labels:
+        app: cloud-service-provider
+    spec:
+      containers:
+        - name: cloud-service-provider
+          image: username/cloud-service-provider:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: developer-and-technical-expert
+  labels:
+    app: developer-and-technical-expert
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: developer-and-technical-expert
+  template:
+    metadata:
+      labels:
+        app: developer-and-technical-expert
+    spec:
+      containers:
+        - name: developer-and-technical-expert
+          image: username/developer-and-technical-expert:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marketing-and-sales-expert
+  labels:
+    app: marketing-and-sales-expert
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: marketing-and-sales-expert
+  template:
+    metadata:
+      labels:
+        app: marketing-and-sales-expert
+    spec:
+      containers:
+        - name: marketing-and-sales-expert
+          image: username/marketing-and-sales-expert:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: demand-company
+  labels:
+    app: demand-company
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: demand-company
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: supply-company
+  labels:
+    app: supply-company
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: supply-company
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-technology-provider
+  labels:
+    app: ai-technology-provider
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: ai-technology-provider
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: advertising-and-marketing-partner
+  labels:
+    app: advertising-and-marketing-partner
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: advertising-and-marketing-partner
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloud-service-provider
+  labels:
+    app: cloud-service-provider
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: cloud-service-provider
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: developer-and-technical-expert
+  labels:
+    app: developer-and-technical-expert
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: developer-and-technical-expert
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: marketing-and-sales-expert
+  labels:
+    app: marketing-and-sales-expert
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: marketing-and-sales-expert
+

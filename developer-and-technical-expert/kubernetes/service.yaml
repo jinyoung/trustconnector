@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: developer-and-technical-expert
+  labels:
+    app: developer-and-technical-expert
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: developer-and-technical-expert
